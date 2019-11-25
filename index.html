@@ -1,0 +1,234 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content ="text/html; UTF-8" />
+        <script src = "jquery-2.1.4.js"></script>
+        <script src = "cortex_code_example.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link
+    </head>
+    <body>
+        <div class"navbar"><span>Real - Time Chart with Plotly.js</span></div>
+        <div class="wrapper">
+            <div id="low_beta"></div>
+            <div id="high_beta"></div>
+            <div id="alpha"></div>
+            <div id="theta"></div>
+            <div id="engagement"></div>//highbeta / alpha + theta
+            <div id="fatiuge"></div>//Theta + alpha/ lowbeta
+                
+            //low_beta
+            <script>
+                let socketUrl = 'wss://localhost:6868'
+                let user = {
+                    "clientId":"CjMsoEj6aDCYqrkfsnyjrnlJ95Wuv4iWhHq7WcYB",
+                    "clientSecret":"LKSPP1EUeGoramnqvF51KeqASSzpBBrdaPz2O1La2JHazyf2EujRPjbjfbrD9CHJCSF1SstNnc2WeOVtaj5klQGEAeWCefGOOLr6vHYVFkaYImFDvpEvylXryt4fU0Hn",
+                    "debit":5000
+                }
+
+                let c = new Cortex(user, socketUrl)
+                let streams = ['pow']
+
+                function getData() {
+                   return c.sub(streams['IED_AF3/betaL']);
+                }
+                // ---------- sub data stream
+                // have six kind of stream data ['fac', 'pow', 'eeg', 'mot', 'met', 'com']
+                // user could sub one or many stream at once
+                
+                //c.sub(streams)
+                
+                Plotly.plot('low_beta',[{
+                    y:[getData()],
+                    type: 'line'
+                }]);
+
+                setInterval(function(){
+                    Plotly.extendTraces('low_beta', { y:[[getData()]]},[0]);
+                    cnt++;
+                    if(cnt > 500){
+                        Plotly.relayout('low_beta',{
+                            xaxis: {
+                                range: [cnt-500,cnt]
+                            }
+                        });
+                    }
+                },100);
+            </script> 
+            //high_beta
+
+
+            <script>
+/*
+            //let streams = ['eeg'];
+
+            let socketUrl = 'wss://localhost:6868'
+
+            let user = {
+                "clientId":"CjMsoEj6aDCYqrkfsnyjrnlJ95Wuv4iWhHq7WcYB",
+                "clientSecret":"LKSPP1EUeGoramnqvF51KeqASSzpBBrdaPz2O1La2JHazyf2EujRPjbjfbrD9CHJCSF1SstNnc2WeOVtaj5klQGEAeWCefGOOLr6vHYVFkaYImFDvpEvylXryt4fU0Hn",
+                "debit":5000
+            }
+
+            let c = new Cortex(user, socketUrl)
+            let streams = ['pow']
+            function getData() {
+                return c.sub(streams['IED_AF3/betaH']);
+            }
+
+            Plotly.plot('high_beta',[{
+                y:[getData()],
+                type: 'line'
+            }]);
+
+            setInterval(function(){
+                Plotly.extendTraces('high_beta', { y:[[getData()]]},[0]);
+                cnt++;
+                if(cnt > 500){
+                    Plotly.relayout('high_beta',{
+                        xaxis: {
+                            range: [cnt-500,cnt]
+                        }
+                    });
+                }
+            },100);
+*/
+            </script> 
+            //alpha
+            <script>
+                /*
+                    //let streams = ['eeg'];
+                    let socketUrl = 'wss://localhost:6868'
+                    let user = {
+                        "clientId":"CjMsoEj6aDCYqrkfsnyjrnlJ95Wuv4iWhHq7WcYB",
+                        "clientSecret":"LKSPP1EUeGoramnqvF51KeqASSzpBBrdaPz2O1La2JHazyf2EujRPjbjfbrD9CHJCSF1SstNnc2WeOVtaj5klQGEAeWCefGOOLr6vHYVFkaYImFDvpEvylXryt4fU0Hn",
+                        "debit":5000
+                    }
+
+                    let c = new Cortex(user, socketUrl)
+                    let streams = ['pow']
+                    function getData() {
+                        return c.sub(streams['IED_AF3/alpha']);
+                    }
+
+                    Plotly.plot('alpha',[{
+                        y:[getData()],
+                        type: 'line'
+                    }]);
+
+                    setInterval(function(){
+                        Plotly.extendTraces('alpha', { y:[[getData()]]},[0]);
+                        cnt++;
+                        if(cnt > 500){
+                            Plotly.relayout('alpha',{
+                                xaxis: {
+                                    range: [cnt-500,cnt]
+                                }
+                            });
+                        }
+                    },100);
+                    */
+            </script> 
+            //Theta
+            <script>
+                /*
+                //let streams = ['eeg'];
+                let socketUrl = 'wss://localhost:6868'
+                let user = {
+                    "clientId":"CjMsoEj6aDCYqrkfsnyjrnlJ95Wuv4iWhHq7WcYB",
+                    "clientSecret":"LKSPP1EUeGoramnqvF51KeqASSzpBBrdaPz2O1La2JHazyf2EujRPjbjfbrD9CHJCSF1SstNnc2WeOVtaj5klQGEAeWCefGOOLr6vHYVFkaYImFDvpEvylXryt4fU0Hn",
+                    "debit":5000
+                }
+                let c = new Cortex(user, socketUrl)
+                let streams = ['pow']
+
+                function getData() {
+                   return c.sub(streams['IED_T7/theta']);
+                }
+                    
+    
+                Plotly.plot('theta',[{
+                    y:[getData()],
+                    type: 'line'
+                }]);
+    
+                setInterval(function(){
+                    Plotly.extendTraces('theta', { y:[[getData()]]},[0]);
+                    cnt++;
+                    if(cnt > 500){
+                        Plotly.relayout('theta',{
+                            xaxis: {
+                                range: [cnt-500,cnt]
+                            }
+                        });
+                    }
+                },100);
+                */
+            </script> 
+            //engagement
+            <script>
+        //let streams = ['eeg'];
+        /*
+                let socketUrl = 'wss://localhost:6868'
+                let user = {
+                    "clientId":"CjMsoEj6aDCYqrkfsnyjrnlJ95Wuv4iWhHq7WcYB",
+                    "clientSecret":"LKSPP1EUeGoramnqvF51KeqASSzpBBrdaPz2O1La2JHazyf2EujRPjbjfbrD9CHJCSF1SstNnc2WeOVtaj5klQGEAeWCefGOOLr6vHYVFkaYImFDvpEvylXryt4fU0Hn",
+                    "debit":5000
+                }
+
+                let c = new Cortex(user, socketUrl)
+                let streams = ['pow']
+                function getData() {
+                   return c.sub(streams['IED_T7/gamma']);
+                }
+
+        Plotly.plot('engagement',[{
+            y:[getData()],
+            type: 'line'
+        }]);
+
+        setInterval(function(){
+            Plotly.extendTraces('engagement', { y:[[getData()]]},[0]);
+            cnt++;
+            if(cnt > 500){
+                Plotly.relayout('engagement',{
+                    xaxis: {
+                        range: [cnt-500,cnt]
+                    }
+                });
+            }
+        },100);
+        */
+            </script> 
+            //fatiuge
+            <script>
+        //let streams = ['eeg'];
+                /*
+        function getData() {
+           return Math.random();
+        }
+
+        Plotly.plot('fatiuge',[{
+            y:[getData()],
+            type: 'line'
+        }]);
+
+        setInterval(function(){
+            Plotly.extendTraces('fatiuge', { y:[[getData()]]},[0]);
+            cnt++;
+            if(cnt > 500){
+                Plotly.relayout('fatiuge',{
+                    xaxis: {
+                        range: [cnt-500,cnt]
+                    }
+                });
+            }
+        },100);
+        */
+            </script> 
+*/
+        </div>
+    </body>
+
+</html>
+
+
