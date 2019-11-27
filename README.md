@@ -1,5 +1,12 @@
-# EEG_GUI
-This project is to produce a custom GUI application for use with the emotiv BCI headset to allow the user to view EEG data in real time.
+# EEG GUI
+This project is to produce a custom GUI application for use with the emotiv BCI headset to allow the user to view EEG data in real time. This application allows users to visualize EEG data using the Emotiv Insight headset. The following metrics are plotted in real time. 
+
+* Low Beta Waves
+* High Beta Waves
+* Alpha Waves
+* Theta Waves
+* User Engagement Levels
+* Fatigue Levels
 
 ## Installation 
 * [Install Nodejs](https://nodejs.org/en/)
