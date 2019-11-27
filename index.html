@@ -65,7 +65,7 @@
     .label{
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 1em;
-        
+
     }
     .metrics_graph{
         width: 100%;
@@ -99,12 +99,12 @@
         cursor: pointer;
         color: white;
     }
-    
+
 </style>
 
 </head>
 
-<body>   
+<body>
     <div id="header">
         <div id="header_ctn">
             <span id="title">Performance Metrics for AF3 and AF4 Channels</span>
@@ -123,8 +123,8 @@
             <div class="metric_header">
                 <span class="metric_title">AF3 Metrics</span>
             </div>
-            
-            <div class="metrics_ctn"> 
+
+            <div class="metrics_ctn">
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Low Beta</span>
@@ -133,7 +133,7 @@
                         <div id="low_beta_AF3" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">High Beta</span>
@@ -142,7 +142,7 @@
                         <div id="high_beta_AF3" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Alpha</span>
@@ -151,7 +151,7 @@
                         <div id="alpha_AF3" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Theta</span>
@@ -160,7 +160,7 @@
                         <div id="theta_AF3" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Engagement</span>
@@ -169,7 +169,7 @@
                         <div id="engagement_AF3" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Fatigue</span>
@@ -178,17 +178,17 @@
                         <div id="fatigue_AF3" class="m_graph"></div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
-        
-        
+
+
         <div class="metrics" id="AF4" style="display:none;">
             <div class="metric_header">
                 <span class="metric_title">AF4 Metrics</span>
             </div>
-            
-            <div class="metrics_ctn"> 
+
+            <div class="metrics_ctn">
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Low Beta</span>
@@ -197,7 +197,7 @@
                         <div id="low_beta_AF4" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">High Beta</span>
@@ -206,7 +206,7 @@
                         <div id="high_beta_AF4" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Alpha</span>
@@ -215,7 +215,7 @@
                         <div id="alpha_AF4" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Theta</span>
@@ -224,7 +224,7 @@
                         <div id="theta_AF4" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Engagement</span>
@@ -233,7 +233,7 @@
                         <div id="engagement_AF4" class="m_graph"></div>
                     </div>
                 </div>
-                
+
                 <div class="container">
                     <div class="ctn_label">
                         <span class="label">Fatigue</span>
@@ -242,38 +242,18 @@
                         <div id="fatigue_AF4" class="m_graph"></div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
-        
+
     </div>
-    
+
     <script>
-        //I left one instance of this incase it's needed later, I deleted the rest.
-        
-        //Low Beta
-        
-        /*let socketUrl = 'wss://localhost:6868'
-        let user = {
-            "clientId":"CjMsoEj6aDCYqrkfsnyjrnlJ95Wuv4iWhHq7WcYB",
-            "clientSecret":"LKSPP1EUeGoramnqvF51KeqASSzpBBrdaPz2O1La2JHazyf2EujRPjbjfbrD9CHJCSF1SstNnc2WeOVtaj5klQGEAeWCefGOOLr6vHYVFkaYImFDvpEvylXryt4fU0Hn",
-            "debit":5000
-        }
-        
-        let c = new Cortex(user, socketUrl)
-        let streams = ['pow']
-        */
-        // ---------- sub data stream
-        // have six kind of stream data ['fac', 'pow', 'eeg', 'mot', 'met', 'com']
-        // user could sub one or many stream at once
-        
-        //c.sub(streams)
-        
         function getData(name) {
             //Tailor the function to get data per name so it's multiuse.
             return Math.random();
-        } 
-        
+        }
+
         function plot_g(name){
             let layout = {
                 margin: {
@@ -283,18 +263,18 @@
                     r: 20
                 }
             };
-            
+
             Plotly.plot(name,[{
                 y:[getData(name)],
                 type: 'line',
             }], layout, {responsive: true});
-            
+
             startInterval(name);
         }
-        
+
         function startInterval(name){
             let cnt = 0;
-            
+
             setInterval(function(){
                 if(!pause){
                     Plotly.extendTraces(name, { y:[[getData(name)]]},[0]);
@@ -307,31 +287,31 @@
                         });
                     }
                 }
-                
+
             },100);
         }
-        
-        
+
+
         plot_g('low_beta_AF3');
         plot_g('high_beta_AF3');
         plot_g('alpha_AF3');
         plot_g('theta_AF3');
         plot_g('engagement_AF3');
         plot_g('fatigue_AF3');
-        
-        
+
+
         let AF3_switch = document.getElementById('AF3_switch');
         let AF3 = document.getElementById('AF3');
         let AF4_switch = document.getElementById('AF4_switch');
         let AF4 = document.getElementById('AF4');
         let pause = false;
         let init = false;
-        
+
         AF3_switch.addEventListener('click', function(e){
             if(!AF3_switch.classList.contains('active')){
                 AF3_switch.classList.toggle('active');
                 AF4_switch.classList.toggle('active');
-                
+
                 pause = true;
                 $(AF4).slideUp(200, function(f){
                     $(AF3).slideDown(200, function(g){
@@ -340,17 +320,17 @@
                 });
             };
         });
-        
+
         AF4_switch.addEventListener('click', function(e){
             if(!AF4_switch.classList.contains('active')){
                 AF3_switch.classList.toggle('active');
                 AF4_switch.classList.toggle('active');
-                
+
                 pause = true;
                 $(AF3).slideUp(200, function(f){
-                    
+
                     $(AF4).slideDown(200, function(g){
-                        
+
                         if(!init){
                             plot_g('low_beta_AF4');
                             plot_g('high_beta_AF4');
@@ -360,16 +340,16 @@
                             plot_g('fatigue_AF4');
                             init = true;
                         }
-                        
+
                         pause = false;
                     });
                 });
             };
         });
-        
-        
-    </script> 
-    
+
+
+    </script>
+
 </body>
 
 </html>
