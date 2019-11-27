@@ -22,9 +22,10 @@ Go to [emotiv website](https://emotiv.com) for create new emotivid
 ### Make sure you are using your Client ID and Client Secret
 If not go to [emotiv website](https://emotiv.com) to create a new pair of client id and client secret for your app.
 In the code for cortex_code_example.js replace the following code...
-```"clientId":"Your Client ID",```
-```"clientSecret":"Your Client Secret"```
-
+```
+"clientId":"Your Client ID",
+"clientSecret":"Your Client Secret"
+```
 ## Running the Program
 * Start the CortexUI
 * Login on CortexUI with emotivid and password manually
