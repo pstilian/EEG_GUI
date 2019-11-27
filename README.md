@@ -21,6 +21,9 @@ Go to [emotiv website](https://emotiv.com) for create new emotivid
 
 ### Make sure you are using your Client ID and Client Secret
 If not go to [emotiv website](https://emotiv.com) to create a new pair of client id and client secret for your app.
+In the code for cortex_code_example.js replace the following code...
+```"clientId":"Your Client ID",```
+```"clientSecret":"Your Client Secret"```
 
 ## Running the Program
 * Start the CortexUI
@@ -29,7 +32,7 @@ If not go to [emotiv website](https://emotiv.com) to create a new pair of client
 * Wear headset and make sure have a good contact quality, contact quality could be viewed visually on CortexUI
 * Run example first time to request access ```node cortex_code_example.js```
 * Approve access on CortexUI manually (Action of approve need to do only onece)
-*
+* Run the program using ```index.html```
 
 ## Credits to Contributors
 * [Peter Stilian](https://github.com/pstilian)
