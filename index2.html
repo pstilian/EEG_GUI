@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content ="text/html; UTF-8" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous">
+</script>
+
+<script src = "cortex_code_example.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+    body{
+        display:flex;
+        flex-direction: column;
+    }
+    #header{
+        margin: 10px;
+        margin-bottom: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:center;
+    }
+    #header_ctn{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    #title{
+        font-size: 1.5em;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+    }
+    #body{
+        margin: 10px;
+        display:flex;
+        flex-direction: column;
+    }
+    .metrics{
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+    }
+    .metric_title{
+        font-size: 1.2em;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .metrics_ctn{
+        margin-left: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .container{
+        display: flex;
+        align-items: center;
+    }
+    .ctn_label{
+        padding: 5px;
+        min-width: 100px;
+        display: flex;
+        justify-content: center;
+    }
+    .label{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1em;
+    }
+    .metrics_graph{
+        width: 100%;
+    }
+    .m_graph{
+        height: 100px;
+    }
+    .btn_ctn{
+        padding: 1px;
+        border: 1px solid lightgray;
+        display: flex;
+        justify-content: space-between;
+        width: 150px;
+        border-radius: 10%;
+        background-color: lightgray;
+    }
+    .btn{
+        border: none;
+        border-radius: 5px;
+        padding: 8px;
+        min-width: 70px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.3em;
+        color: #666;
+        background-color: white;
+        outline: none;
+        transition: all 0.3s ease-out 0s;
+    }
+    .active{
+        background-color: #666;
+        cursor: pointer;
+        color: white;
+    }
+</style>
+
+</head>
+
+<body>
+    <div id="header">
+        <div id="header_ctn">
+            <span id="title">Performance Metrics for AF3 and AF4 Channels</span>
+        </div>
+        <div class="btn_ctn">
+            <button type="button" id="AF3_switch" class="btn active">
+                AF3
+            </button>
+            <button type="button" id="AF4_switch" class="btn">
+                AF4
+            </button>
+        </div>
+    </div>
+    <div id="body">
+        <div class="metrics" id="AF3">
+            <div class="metric_header">
+                <span class="metric_title">AF3 Metrics</span>
+            </div>
+
+            <div class="metrics_ctn">
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Low Beta</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="low_beta_AF3" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">High Beta</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="high_beta_AF3" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Alpha</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="alpha_AF3" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Theta</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="theta_AF3" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Engagement</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="engagement_AF3" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Fatigue</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="fatigue_AF3" class="m_graph"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="metrics" id="AF4" style="display:none;">
+            <div class="metric_header">
+                <span class="metric_title">AF4 Metrics</span>
+            </div>
+
+            <div class="metrics_ctn">
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Low Beta</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="low_beta_AF4" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">High Beta</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="high_beta_AF4" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Alpha</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="alpha_AF4" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Theta</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="theta_AF4" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Engagement</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="engagement_AF4" class="m_graph"></div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="ctn_label">
+                        <span class="label">Fatigue</span>
+                    </div>
+                    <div class="metrics_graph">
+                        <div id="fatigue_AF4" class="m_graph"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        /*
+        function getData(name) {
+            //Tailor the function to get data per name so it's multiuse.
+            return Math.random();
+        }
+        function plot_g(name){
+            let layout = {
+                margin: {
+                    l: 30,
+                    t: 20,
+                    b: 20,
+                    r: 20
+                }
+            };
+            Plotly.plot(name,[{
+                y:[getData(name)],
+                type: 'line',
+            }], layout, {responsive: true});
+            startInterval(name);
+        }
+        function startInterval(name){
+            let cnt = 0;
+            setInterval(function(){
+                if(!pause){
+                    Plotly.extendTraces(name, { y:[[getData(name)]]},[0]);
+                    cnt++;
+                    if(cnt > 100){
+                        Plotly.relayout(name,{
+                            xaxis: {
+                                range: [cnt-100,cnt]
+                            },
+                        });
+                    }
+                }
+            },100);
+        }
+        plot_g('low_beta_AF3');
+        plot_g('high_beta_AF3');
+        plot_g('alpha_AF3');
+        plot_g('theta_AF3');
+        plot_g('engagement_AF3');
+        plot_g('fatigue_AF3');
+        let AF3_switch = document.getElementById('AF3_switch');
+        let AF3 = document.getElementById('AF3');
+        let AF4_switch = document.getElementById('AF4_switch');
+        let AF4 = document.getElementById('AF4');
+        let pause = false;
+        let init = false;
+        AF3_switch.addEventListener('click', function(e){
+            if(!AF3_switch.classList.contains('active')){
+                AF3_switch.classList.toggle('active');
+                AF4_switch.classList.toggle('active');
+                pause = true;
+                $(AF4).slideUp(200, function(f){
+                    $(AF3).slideDown(200, function(g){
+                        pause = false;
+                    });
+                });
+            };
+        });
+        AF4_switch.addEventListener('click', function(e){
+            if(!AF4_switch.classList.contains('active')){
+                AF3_switch.classList.toggle('active');
+                AF4_switch.classList.toggle('active');
+                pause = true;
+                $(AF3).slideUp(200, function(f){
+                    $(AF4).slideDown(200, function(g){
+                        if(!init){
+                            plot_g('low_beta_AF4');
+                            plot_g('high_beta_AF4');
+                            plot_g('alpha_AF4');
+                            plot_g('theta_AF4');
+                            plot_g('engagement_AF4');
+                            plot_g('fatigue_AF4');
+                            init = true;
+                        }
+                        pause = false;
+                    });
+                });
+            };
+        });
+    */
+    </script>
+
+</body>
+
+</html>
