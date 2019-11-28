@@ -1,4 +1,4 @@
-import { getHeapCodeStatistics } from "v8"
+//import { getHeapCodeStatistics } from "v8"
 
 //const WebSocket = require('ws');
 
@@ -428,13 +428,13 @@ class Cortex {
             await this.checkGrantAccessAndQuerySessionInfo()
             this.subRequest(streams, this.authToken, this.sessionId)
             this.socket.addEventListener('message', (data)=>{
-
-                let lb = data.data[2];
-                let hB = data.data[3];
-                let alpha = data.data[1];
-                let theta = data.data[0];
-                let engagement = (data.data[3] / data.data[1]) + data.data[0];
-                let fatigue = data.data[0] + (data.data[1] / data.data[2]);
+                var obj = JSON.parse(data.data);
+                let lb = obj.pow[2];
+                let hB = obj.pow[3];
+                let alpha = obj.pow[1];
+                let theta = obj.pow[0];
+                let engagement = (obj.pow[3] / obj.pow[1]) + obj.pow[0];
+                let fatigue = obj.pow[0] + (obj.pow[1] / obj.pow[2]);
 
 
 
@@ -449,7 +449,7 @@ class Cortex {
                 let cnt = 0;
                 Plotly.plot('low_beta_AF3',[{
                     y:[lb],
-                    type: 'line',
+                    type: 'lines',
                 }], layout, {responsive: true});
                 setInterval(function(){
                     Plotly.extendTraces('low_beta_AF3', { y:[lb]},[0]);
@@ -471,7 +471,7 @@ class Cortex {
                 //plot_g(hb);
                 Plotly.plot('high_beta_AF3',[{
                     y:[hB],
-                    type: 'line',
+                    type: 'lines',
                 }], layout, {responsive: true});
                 setInterval(function(){
                    if(!pause){
@@ -859,7 +859,7 @@ let c = new Cortex(user, socketUrl)
 let streams = ['pow']
 
 
-c.sub(streams);
+c.sub(streams)
 
 /*
 const WebSocket = require('ws');
